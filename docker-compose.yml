@@ -1,0 +1,28 @@
+# > docker-compose build
+# > docker-compose up -d
+# > docker-compose exec pelican bash
+#
+# # pelican-quickstart
+# # make html
+# # make serve
+# # make cliean publish
+# # make github
+
+version: "3.3"
+services:
+  main:
+    build:
+        context: pelican
+        args:
+            - http_proxy=${http_proxy}
+            - https_proxy=${https_proxy}
+    command: /bin/sh -c "while true; do sleep 1; done"
+    env_file:
+        - common.env
+    ports:
+      - "8000:8000"
+    volumes:
+      - work-data:/work
+volumes:
+    work-data:
+        driver: local
